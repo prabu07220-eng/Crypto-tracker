@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --c-surface: 238 244 252;
+  --c-surface-card: 245 249 254;
+  --c-ink: 15 37 69;
+  --c-ink-dim: 90 114 153;
+  --c-ink-faint: 148 168 198;
+  --c-shadow-dark: 163 184 210;
+  --c-shadow-light: 255 255 255;
+  --c-shimmer-via: 255 255 255;
+}
+
+.dark {
+  --c-surface: 16 33 61;
+  --c-surface-card: 24 45 79;
+  --c-ink: 236 242 250;
+  --c-ink-dim: 158 178 206;
+  --c-ink-faint: 104 128 162;
+  --c-shadow-dark: 6 13 26;
+  --c-shadow-light: 33 58 99;
+  --c-shimmer-via: 40 68 112;
+}
+
+@layer base {
+  body {
+    @apply bg-surface text-ink font-sans antialiased transition-colors duration-200;
+  }
+
+  .num {
+    font-feature-settings: 'tnum' 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  *:focus-visible {
+    outline: 2px solid theme('colors.azure.DEFAULT');
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(94, 142, 245, 0.35);
+    border-radius: 8px;
+  }
+}
+
+@layer components {
+  .neu-card {
+    background-color: rgb(var(--c-surface-card));
+    border-radius: 1rem;
+    box-shadow:
+      8px 8px 20px rgb(var(--c-shadow-dark) / 0.45),
+      -8px -8px 20px rgb(var(--c-shadow-light) / 0.85);
+    transition: box-shadow 0.2s ease;
+  }
+  .neu-card:hover {
+    box-shadow:
+      10px 10px 26px rgb(var(--c-shadow-dark) / 0.5),
+      -10px -10px 26px rgb(var(--c-shadow-light) / 0.9);
+  }
+
+  .neu-flat {
+    background-color: rgb(var(--c-surface-card));
+    border-radius: 0.75rem;
+    box-shadow:
+      4px 4px 10px rgb(var(--c-shadow-dark) / 0.4),
+      -4px -4px 10px rgb(var(--c-shadow-light) / 0.8);
+  }
+
+  .neu-inset {
+    background-color: rgb(var(--c-surface));
+    border-radius: 0.75rem;
+    box-shadow:
+      inset 4px 4px 10px rgb(var(--c-shadow-dark) / 0.35),
+      inset -4px -4px 10px rgb(var(--c-shadow-light) / 0.75);
+  }
+
+  .neu-btn {
+    background-color: rgb(var(--c-surface-card));
+    border-radius: 0.75rem;
+    box-shadow:
+      4px 4px 10px rgb(var(--c-shadow-dark) / 0.4),
+      -4px -4px 10px rgb(var(--c-shadow-light) / 0.8);
+    transition: box-shadow 0.15s ease;
+  }
+  .neu-btn:active {
+    box-shadow:
+      inset 4px 4px 10px rgb(var(--c-shadow-dark) / 0.35),
+      inset -4px -4px 10px rgb(var(--c-shadow-light) / 0.75);
+  }
+
+  .skeleton {
+    border-radius: 0.5rem;
+    background-image: linear-gradient(
+      to right,
+      rgb(var(--c-surface-card)),
+      rgb(var(--c-shimmer-via)),
+      rgb(var(--c-surface-card))
+    );
+    background-size: 800px 100%;
+    animation: shimmer 1.6s linear infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
